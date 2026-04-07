@@ -8,7 +8,7 @@ import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+import time
 app = FastAPI(title="Logic Analyzer Backend")
 
 # 允许跨域请求（前端独立运行必备）
@@ -32,9 +32,9 @@ state = {
 class ControlParams(BaseModel):
     cmd: int
     div: int
-    trig_mode: int
-    trig_ch: int
-
+    mode: int
+    p1: int
+    p2: int
 
 # ================= 底层硬件读取线程 =================
 def serial_reader_task():
@@ -130,17 +130,32 @@ def send_control_frame(params: ControlParams):
     if not ser or not ser.is_open:
         return {"status": "error", "msg": "硬件未连接"}
 
-    # 组装 8 字节下行帧: AA 55 CMD DIV T_MODE T_CH RES CHK
-    frame = bytearray([0xAA, 0x55, params.cmd, params.div, params.trig_mode, params.trig_ch, 0x00])
-    checksum = sum(frame) & 0xFF
-    frame.append(checksum)
-
     try:
-        ser.write(frame)
-        return {"status": "success", "msg": "指令下发成功"}
-    except Exception as e:
-        return {"status": "error", "msg": str(e)}
+        # 强制将所有传入的参数约束在 8 位无符号整数范围内 (0-255)
+        cmd_byte = params.cmd & 0xFF
+        div_byte = params.div & 0xFF
+        mode_byte = params.mode & 0xFF
+        p1_byte = params.p1 & 0xFF
+        p2_byte = params.p2 & 0xFF
 
+        # 按照 FPGA 协议组装前 7 字节
+        frame = bytearray([0xAA, 0x55, cmd_byte, div_byte, mode_byte, p1_byte, p2_byte])
+
+        # 计算第 8 字节的校验和并追加
+        checksum = sum(frame) & 0xFF
+        frame.append(checksum)
+
+        # 执行物理下发
+        ser.write(frame)
+
+        # 在后端终端打印出生成的 Hex 流，用于自证与排错
+        hex_str = ' '.join([f"{b:02X}" for b in frame])
+        print(f"[{time.strftime('%H:%M:%S')}] 向上位机下发控制指令: {hex_str}")
+
+        return {"status": "success", "msg": f"指令已发送: {hex_str}"}
+
+    except Exception as e:
+        return {"status": "error", "msg": f"指令组装或发送引发异常: {str(e)}"}
 
 @app.websocket("/ws/data")
 async def websocket_endpoint(websocket: WebSocket):
