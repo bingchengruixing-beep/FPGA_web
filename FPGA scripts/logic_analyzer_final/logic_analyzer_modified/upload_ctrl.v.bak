@@ -1,0 +1,80 @@
+module upload_ctrl(
+    input               clk,
+    input               rst_n,
+    input               capture_done,
+    input       [7:0]   ram_rd_data,
+    input               tx_busy,
+    input               tx_done,
+
+    output  reg [10:0]  ram_rd_addr,
+    output  reg         tx_start,
+    output  reg [7:0]   tx_data,
+    output  reg         upload_done
+);
+
+reg [2:0] state;
+
+localparam S_IDLE     = 3'd0;
+localparam S_WAIT_RD  = 3'd1;
+localparam S_TX_START = 3'd2;
+localparam S_WAIT_TX  = 3'd3;
+localparam S_DONE     = 3'd4;
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state       <= S_IDLE;
+        ram_rd_addr <= 11'd0;
+        tx_start    <= 1'b0;
+        tx_data     <= 8'd0;
+        upload_done <= 1'b0;
+    end
+    else begin
+        tx_start <= 1'b0;
+
+        case (state)
+            S_IDLE: begin
+                ram_rd_addr <= 11'd0;
+                upload_done <= 1'b0;
+                if (capture_done) begin
+                    state <= S_WAIT_RD;
+                end
+            end
+
+            S_WAIT_RD: begin
+                // 等待一个时钟，让同步读RAM的数据稳定到 ram_rd_data
+                state <= S_TX_START;
+            end
+
+            S_TX_START: begin
+                if (!tx_busy) begin
+                    tx_start <= 1'b1;
+                    tx_data  <= ram_rd_data;
+                    state    <= S_WAIT_TX;
+                end
+            end
+
+            S_WAIT_TX: begin
+                if (tx_done) begin
+                    if (ram_rd_addr == 11'd2047) begin
+                        state <= S_DONE;
+                    end
+                    else begin
+                        ram_rd_addr <= ram_rd_addr + 1'b1;
+                        state       <= S_WAIT_RD;
+                    end
+                end
+            end
+
+            S_DONE: begin
+                upload_done <= 1'b1;
+                state       <= S_DONE;
+            end
+
+            default: begin
+                state <= S_IDLE;
+            end
+        endcase
+    end
+end
+
+endmodule

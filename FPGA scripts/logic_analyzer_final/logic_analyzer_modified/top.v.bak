@@ -1,0 +1,10 @@
+module top(
+    input           clk,
+    input           rst_n,
+    input   [7:0]   din,
+    output          uart_tx
+);
+
+assign uart_tx = 1'b1;
+
+endmodule

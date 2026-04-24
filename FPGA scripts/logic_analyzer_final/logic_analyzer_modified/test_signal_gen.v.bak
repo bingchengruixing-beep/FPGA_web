@@ -1,0 +1,41 @@
+module test_signal_gen(
+    input               clk,
+    input               rst_n,
+    input               sample_en,
+    output  reg [7:0]   test_din
+);
+
+reg [15:0] sample_cnt;
+reg [7:0]  lfsr;
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        sample_cnt <= 16'd0;
+        lfsr       <= 8'h5A;
+        test_din   <= 8'd0;
+    end
+    else if (sample_en) begin
+        sample_cnt <= sample_cnt + 1'b1;
+        lfsr       <= {lfsr[6:0], lfsr[7] ^ lfsr[5] ^ lfsr[4] ^ lfsr[3]};
+
+        // 8 路内部测试信号，便于上位机观察不同波形
+        // bit0: 规则方波
+        test_din[0] <= sample_cnt[3];
+        // bit1: 更慢一点的方波
+        test_din[1] <= sample_cnt[5];
+        // bit2: 脉冲信号（每 16 个采样点高 1 个点）
+        test_din[2] <= (sample_cnt[3:0] == 4'h0);
+        // bit3: 突发脉冲（每 64 个采样点中，高 8 个点）
+        test_din[3] <= (sample_cnt[5:3] == 3'b000);
+        // bit4: 用于边沿/电平触发测试的占空比变化信号
+        test_din[4] <= (sample_cnt[4:0] < 5'd10);
+        // bit5: 伪随机信号
+        test_din[5] <= lfsr[7];
+        // bit6: 组合信号，便于验证模式触发
+        test_din[6] <= sample_cnt[4] ^ sample_cnt[7];
+        // bit7: 心跳信号，变化最慢
+        test_din[7] <= sample_cnt[8];
+    end
+end
+
+endmodule

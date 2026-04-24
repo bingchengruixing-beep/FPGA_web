@@ -1,0 +1,156 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/modelsim/examples
+T_opt
+!s110 1774945344
+V4z>[BBL83H2?3;R=1`>6>3
+04 14 4 work tb_upload_ctrl fast 0
+=1-745d2208f7f0-69cb8440-5f-8aa0
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+n@_opt
+Z2 OL;O;10.4;61
+T_opt1
+!s110 1774938528
+Vjgfm8lghIf8^7_?Pc8F_V2
+04 14 4 work tb_config_ctrl fast 0
+=1-745d2208f7f0-69cb69a0-bd-1284
+R1
+n@_opt1
+R2
+R0
+T_opt2
+!s110 1774942175
+V7KTANidmUXinZH5Ge4E@60
+04 15 4 work tb_trigger_ctrl fast 0
+=1-745d2208f7f0-69cb77df-104-9a28
+R1
+n@_opt2
+R2
+R0
+vconfig_ctrl
+Z3 !s110 1774937727
+!i10b 1
+!s100 YFcN7JO25EgEZzFMlQim:3
+In05^TC60bcW@]ASXjAJ`Q3
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 dD:/intelFPGA/logic_analyzer
+w1774672120
+8D:/intelFPGA/logic_analyzer/config_ctrl.v
+FD:/intelFPGA/logic_analyzer/config_ctrl.v
+L0 1
+Z6 OL;L;10.4;61
+r1
+!s85 0
+31
+!s108 1774937727.342000
+!s107 D:/intelFPGA/logic_analyzer/config_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/config_ctrl.v|
+!i113 0
+Z7 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vtb_config_ctrl
+R3
+!i10b 1
+!s100 c<V=Ke[UcbUHc347[_VZB0
+IlgdPAIfc]T20:C=M^`D:22
+R4
+R5
+w1774937019
+8D:/intelFPGA/logic_analyzer/sim/tb_config_ctrl.v
+FD:/intelFPGA/logic_analyzer/sim/tb_config_ctrl.v
+L0 3
+R6
+r1
+!s85 0
+31
+!s108 1774937727.242000
+!s107 D:/intelFPGA/logic_analyzer/sim/tb_config_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/sim/tb_config_ctrl.v|
+!i113 0
+R7
+vtb_trigger_ctrl
+Z8 !s110 1774942127
+!i10b 1
+!s100 i5JfoN?BJ0jA9FNV6>]]73
+Icaj_11GR>Gl]:LLYVfFzB2
+R4
+R5
+w1774941391
+8D:/intelFPGA/logic_analyzer/sim/tb_trigger_ctrl.v
+FD:/intelFPGA/logic_analyzer/sim/tb_trigger_ctrl.v
+L0 3
+R6
+r1
+!s85 0
+31
+!s108 1774942127.788000
+!s107 D:/intelFPGA/logic_analyzer/sim/tb_trigger_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/sim/tb_trigger_ctrl.v|
+!i113 0
+R7
+vtb_upload_ctrl
+Z9 !s110 1774945328
+!i10b 1
+!s100 Q167[7gZ=3n871ZR^3UzX3
+IIFj@@MEZJkiPf:JDch`jG2
+R4
+R5
+w1774945094
+8D:/intelFPGA/logic_analyzer/sim/tb_upload_ctrl.v
+FD:/intelFPGA/logic_analyzer/sim/tb_upload_ctrl.v
+L0 3
+R6
+r1
+!s85 0
+31
+!s108 1774945328.778000
+!s107 D:/intelFPGA/logic_analyzer/sim/tb_upload_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/sim/tb_upload_ctrl.v|
+!i113 0
+R7
+vtrigger_ctrl
+R8
+!i10b 1
+!s100 fOezTjnP45ddil@Wzbe<Y2
+IkcW10Di8LHmQ?Rd9GT]=m1
+R4
+R5
+w1774672320
+8D:/intelFPGA/logic_analyzer/trigger_ctrl.v
+FD:/intelFPGA/logic_analyzer/trigger_ctrl.v
+L0 1
+R6
+r1
+!s85 0
+31
+!s108 1774942127.749000
+!s107 D:/intelFPGA/logic_analyzer/trigger_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/trigger_ctrl.v|
+!i113 0
+R7
+vupload_ctrl
+R9
+!i10b 1
+!s100 W?;d]@3IGHm<:KcEgo?m<0
+ILL8a7N<eJI[A^>KSn;BWF2
+R4
+R5
+w1774672808
+8D:/intelFPGA/logic_analyzer/upload_ctrl.v
+FD:/intelFPGA/logic_analyzer/upload_ctrl.v
+L0 1
+R6
+r1
+!s85 0
+31
+!s108 1774945328.694000
+!s107 D:/intelFPGA/logic_analyzer/upload_ctrl.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/intelFPGA/logic_analyzer/upload_ctrl.v|
+!i113 0
+R7

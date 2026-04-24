@@ -1,0 +1,53 @@
+
+State Machine - |top|tx_mux_ctrl:u_tx_mux_ctrl|state
+Name state.S_SPI_MOSI state.S_SPI_HEAD2 state.S_SPI_HEAD1 state.S_IDLE state.S_SPI_MISO 
+state.S_IDLE 0 0 0 0 0 
+state.S_SPI_HEAD1 0 0 1 1 0 
+state.S_SPI_HEAD2 0 1 0 1 0 
+state.S_SPI_MOSI 1 0 0 1 0 
+state.S_SPI_MISO 0 0 0 1 1 
+
+State Machine - |top|uart_decoder:u_uart_decoder|state
+Name state.S_STOP state.S_DATA state.S_START state.S_IDLE 
+state.S_IDLE 0 0 0 0 
+state.S_START 0 0 1 1 
+state.S_DATA 0 1 0 1 
+state.S_STOP 1 0 0 1 
+
+State Machine - |top|upload_ctrl:u_upload_ctrl|state
+Name state.S_CKS_WAIT state.S_CKS_START state.S_DATA_WAIT state.S_DATA_START state.S_RD_WAIT state.S_HDR2_WAIT state.S_HDR2_START state.S_HDR1_WAIT state.S_HDR1_START state.S_IDLE 
+state.S_IDLE 0 0 0 0 0 0 0 0 0 0 
+state.S_HDR1_START 0 0 0 0 0 0 0 0 1 1 
+state.S_HDR1_WAIT 0 0 0 0 0 0 0 1 0 1 
+state.S_HDR2_START 0 0 0 0 0 0 1 0 0 1 
+state.S_HDR2_WAIT 0 0 0 0 0 1 0 0 0 1 
+state.S_RD_WAIT 0 0 0 0 1 0 0 0 0 1 
+state.S_DATA_START 0 0 0 1 0 0 0 0 0 1 
+state.S_DATA_WAIT 0 0 1 0 0 0 0 0 0 1 
+state.S_CKS_START 0 1 0 0 0 0 0 0 0 1 
+state.S_CKS_WAIT 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |top|capture_ctrl:u_capture_ctrl|state
+Name state.S_DONE state.S_CAPTURE state.S_WAIT_TRIGGER state.S_IDLE 
+state.S_IDLE 0 0 0 0 
+state.S_WAIT_TRIGGER 0 0 1 1 
+state.S_CAPTURE 0 1 0 1 
+state.S_DONE 1 0 0 1 
+
+State Machine - |top|config_ctrl:u_config_ctrl|state
+Name state.S_CKS state.S_P2 state.S_P1 state.S_MODE state.S_DIV state.S_CMD state.S_WAIT_55 state.S_WAIT_AA 
+state.S_WAIT_AA 0 0 0 0 0 0 0 0 
+state.S_WAIT_55 0 0 0 0 0 0 1 1 
+state.S_CMD 0 0 0 0 0 1 0 1 
+state.S_DIV 0 0 0 0 1 0 0 1 
+state.S_MODE 0 0 0 1 0 0 0 1 
+state.S_P1 0 0 1 0 0 0 0 1 
+state.S_P2 0 1 0 0 0 0 0 1 
+state.S_CKS 1 0 0 0 0 0 0 1 
+
+State Machine - |top|uart_rx:u_uart_rx|state
+Name state.S_STOP state.S_DATA state.S_START state.S_IDLE 
+state.S_IDLE 0 0 0 0 
+state.S_START 0 0 1 1 
+state.S_DATA 0 1 0 1 
+state.S_STOP 1 0 0 1 

@@ -1,0 +1,45 @@
+module capture_ctrl(
+    input               clk,
+    input               rst_n,
+    input               sample_en,
+    input       [7:0]   din_sync,
+
+    output  reg         ram_wr_en,
+    output  reg [10:0]  ram_wr_addr,
+    output  reg [7:0]   ram_wr_data,
+    output  reg         capture_done
+);
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        ram_wr_en       <= 1'b0;
+        ram_wr_addr     <= 11'd0;
+        ram_wr_data     <= 8'd0;
+        capture_done    <= 1'b0;
+    end
+    else begin
+        if (!capture_done) begin
+            if (sample_en) begin
+                ram_wr_en   <= 1'b1;
+                ram_wr_data <= din_sync;
+
+                if (ram_wr_addr == 11'd2047) begin
+                    ram_wr_addr   <= ram_wr_addr;
+                    capture_done  <= 1'b1;
+                end
+                else begin
+                    ram_wr_addr   <= ram_wr_addr + 1'b1;
+                    capture_done  <= 1'b0;
+                end
+            end
+            else begin
+                ram_wr_en <= 1'b0;
+            end
+        end
+        else begin
+            ram_wr_en <= 1'b0;
+        end
+    end
+end
+
+endmodule

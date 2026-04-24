@@ -1,0 +1,53 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "uart_tx",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "din[0]",
+					"strict" : false
+				},
+				{
+					"name" : "uart_rx",
+					"strict" : false
+				},
+				{
+					"name" : "din[1]",
+					"strict" : false
+				},
+				{
+					"name" : "din[5]",
+					"strict" : false
+				},
+				{
+					"name" : "din[6]",
+					"strict" : false
+				},
+				{
+					"name" : "din[4]",
+					"strict" : false
+				},
+				{
+					"name" : "din[7]",
+					"strict" : false
+				},
+				{
+					"name" : "din[2]",
+					"strict" : false
+				},
+				{
+					"name" : "din[3]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
